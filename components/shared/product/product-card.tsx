@@ -7,7 +7,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Card className='w-full max-w-sm'>
       <CardHeader title='Product Card'>
-        <Link href={`/product/${product.name}`}>
+        <Link href={`/product/${product.slug}`}>
           <Image src={product.images[0]} alt={product.name} height={300} width={300} priority={true} />
         </Link>
       </CardHeader>

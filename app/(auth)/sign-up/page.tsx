@@ -1,14 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { APP_NAME } from '@/lib/constants'
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
-import SignUpForm  from './sign-up-form'
-export const metdata: Metadata = {
-  title: 'Sign Up'
-}
+import SignUpForm from './sign-up-form'
+
 const SignUpPage = async (props: { searchParams: Promise<{ callbackUrl: string }> }) => {
   const { callbackUrl } = await props.searchParams
   const session = await auth()

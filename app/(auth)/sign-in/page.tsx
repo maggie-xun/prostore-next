@@ -1,14 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { APP_NAME } from '@/lib/constants'
 import CredentialsSignInForm from './credentials-signin-form'
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
-export const metdata: Metadata = {
-  title: 'Sign in'
-}
+
 const SignPage = async (props: { searchParams: Promise<{ callbackUrl: string }> }) => {
   const { callbackUrl } = await props.searchParams
   const session = await auth()

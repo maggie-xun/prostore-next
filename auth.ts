@@ -4,7 +4,6 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { prisma } from './db/prisma'
 import { compareSync } from 'bcrypt-ts-edge'
 import type { NextAuthConfig } from 'next-auth'
-// import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 export const config = {
@@ -27,10 +26,8 @@ export const config = {
       async authorize(credentials) {
         if (credentials == null) return null
         const user = await prisma.user.findFirst({ where: { email: credentials.email as string } })
-        console.log(user, 'user')
         if (user && user.password) {
           const isMatch = compareSync(credentials.password as string, user.password)
-          console.log('is mathc', isMatch)
           if (isMatch) {
             return { id: user.id, name: user.name, email: user.email, role: user.role }
           }
@@ -39,7 +36,6 @@ export const config = {
         return null
       }
     })
-    // if(credentials.email === 'admin' && credentials.password === 'admin'){
   ],
   callbacks: {
     async session({ session, user, trigger, token }: any) {
@@ -72,7 +68,6 @@ export const config = {
 
       if (!request.cookies.get('sessionCartId')) {
         const sessionCartId = crypto.randomUUID()
-        console.log('sessionCartId', sessionCartId)
         const newRequestHeader = new Headers(request.headers)
 
         const response = NextResponse.next({
